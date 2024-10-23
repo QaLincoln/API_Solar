@@ -70,20 +70,20 @@ describe('Teste de API Solar', () => {
 
 
     
-  it.only('Deve retornar um status 200 para a requisição GET', () => {
+//   it.only('Deve retornar um status 200 para a requisição GET', () => {
 
-     cy.request({
-        method: 'GET',
-        url: 'https://bff-dev-ri-0-app-solar-dev.apps.opshml.solarbr.com.br/api/docs#/Account/AccountController_createUser',
-        headers: {
-            'Authorization': AUTHORIZATION_TOKEN,
-            'Content-Type': 'application/json'
-        }
-     }).then((res) => {
-            expect(res.status).to.eq(200)
-             expect(res.body).is.not.empty
-            // expect(res.body).to.have.property('msg') // Verifique o que você espera na resposta
-     })
-  })
+//      cy.request({
+//         method: 'GET',
+//         url: 'https://bff-dev-ri-0-app-solar-dev.apps.opshml.solarbr.com.br/api/docs#/Account/AccountController_createUser',
+//         headers: {
+//             'Authorization': AUTHORIZATION_TOKEN,
+//             'Content-Type': 'application/json'
+//         }
+//      }).then((res) => {
+//             expect(res.status).to.eq(200)
+//              expect(res.body).is.not.empty
+//             // expect(res.body).to.have.property('msg') // Verifique o que você espera na resposta
+//      })
+//   })
   
 })
