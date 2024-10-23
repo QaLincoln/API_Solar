@@ -26,6 +26,7 @@ describe('Teste de API Solar', () => {
 
        });
    });
+   
 
    it.only('Deve ter sucesso na rota POST authentication/user', () => {
     const requestData = {
@@ -43,15 +44,22 @@ describe('Teste de API Solar', () => {
        
         cy.log(JSON.stringify(response.body));     // Exibir a resposta de LOG no Cypress GUI
 
-        // Verifique a resposta
-      
-        expect(response.body).to.be.an('object')      // Verifique se a resposta é um objeto json
-        expect(response.status).to.eq(201); // Verifique se o status é 201 
-        // expect(response.body).to.have.property('telphone');
-        // expect(response.body).to.have.property('"clientId": "0006445933"');
-        // expect(response.body).to.have.property('"companyCode": null');
-        expect(response.body).to.have.property('allowPassword');
-        expect(response.body).to.have.property('firstAccess');
+        // Verifique as respostas
+            
+        expect(response.body).to.be.an('object')    // Verifique se a resposta é um objeto
+
+        // Validação das propriedades principais
+        expect(response.body).to.have.property('allowPassword', true);
+        expect(response.body).to.have.property('firstAccess', false);
+
+        // Validação do objeto aninhado 'data'
+        expect(response.body).to.have.property('data').that.is.an('object');
+        expect(response.body.data).to.have.property('firstName', 'Validacao');
+        expect(response.body.data).to.have.property('telphoneMasked', '85-*****-6060');
+        expect(response.body.data).to.have.property('formattedTelephone', '85-*****-6060');
+        expect(response.body.data).to.have.property('telphone', '85981516060');
+        expect(response.body.data).to.have.property('clientId', '0006445933');
+        expect(response.body.data).to.have.property('companyCode', null);
           	
 
        });
@@ -62,20 +70,20 @@ describe('Teste de API Solar', () => {
 
 
     
-  // it.only('Deve retornar um status 200 para a requisição GET', () => {
+  it.only('Deve retornar um status 200 para a requisição GET', () => {
 
-  //    cy.request({
-  //       method: 'GET',
-  //       url: 'https://bff-dev-ri-0-app-solar-dev.apps.opshml.solarbr.com.br/api/docs#/Account/AccountController_createUser',
-  //       headers: {
-  //           'Authorization': AUTHORIZATION_TOKEN,
-  //           'Content-Type': 'application/json'
-  //       }
-  //    }).then((res) => {
-  //           expect(res.status).to.eq(200)
-  //            expect(res.body).is.not.empty
-  //           // expect(res.body).to.have.property('msg') // Verifique o que você espera na resposta
-  //    })
-  // })
+     cy.request({
+        method: 'GET',
+        url: 'https://bff-dev-ri-0-app-solar-dev.apps.opshml.solarbr.com.br/api/docs#/Account/AccountController_createUser',
+        headers: {
+            'Authorization': AUTHORIZATION_TOKEN,
+            'Content-Type': 'application/json'
+        }
+     }).then((res) => {
+            expect(res.status).to.eq(200)
+             expect(res.body).is.not.empty
+            // expect(res.body).to.have.property('msg') // Verifique o que você espera na resposta
+     })
+  })
   
 })
